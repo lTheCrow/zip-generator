@@ -1,0 +1,14 @@
+{
+  "exerciseNumber": 24,
+  "authors": [
+    "Persona Uno", 
+    "Persona Dos", 
+    "Persona Tres", 
+    "Persona Cinco",
+    "Anonymous",
+    "Como se pone el arroba"
+  ],
+  
+  "src": "example/src",
+  "dst": "example/release"
+}
