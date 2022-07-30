@@ -7,6 +7,12 @@ const fs = require("fs");
 const archiver = require("archiver");
 
 /** 
+ * Este modulo requiere de prompt-sync para obtener la entrada por stdin
+ * del usuario para obtener los datos 
+ */
+const prompt = require('prompt-sync')();
+
+/** 
  * ZipData almacenara los datos del archivo zipdata.json
  * 
  * Los datos que contiene son los siguientes:
@@ -38,7 +44,7 @@ class ZipData {
   }
 
   formatAuthorName(authorName) {
-    return authorName.toLowerCase().replaceAll(" ", "_");
+    return authorName.toLowerCase().trim().replaceAll(" ", "_");
   }
 
   formatAuthorList(authorList) {
@@ -91,12 +97,44 @@ function readJsonFile(filename) {
   return data;
 }
 
-// Busca si hay un archivo llamado zipdata.json
-// Si no hay, obtiene los datos por prompt y los guarda en el archivo zipdata.json
+function writeJsonFile(filename, data) {
+  fs.writeFileSync(filename, JSON.stringify(data), 'utf-8');
+}
 
+
+let jsonData = {
+  exerciseNumber: undefined,
+  authors: [],
+  src: "",
+  dst: ""
+}
+
+const jsonFileName = "zipdata.json";
+
+// Busca si hay un archivo llamado zipdata.json
+
+// Si no hay, obtiene los datos por prompt y los guarda en el archivo zipdata.json
 // Si hay, obtiene los datos directamente en el archivo
-jsonData = readJsonFile('zipdata.json');
+
+if (!fs.existsSync(jsonFileName)) {
+  jsonData.exerciseNumber = parseInt(prompt("Ingresa el numero de ejercicio => "));
+
+  let strAuthors = prompt("Ingresa los autores separados por coma => ");
+  jsonData.authors = strAuthors.split(",");
+
+  jsonData.src = prompt("Ingresa el directorio a comprimir => ");
+  jsonData.dst = prompt("Ingresa el directorio destino del archivo comprimido => ");
+
+  writeJsonFile(jsonFileName, jsonData);
+  console.log(`Archivo ${jsonFileName} creado satisfactoriamente.`);
+
+} else {
+  console.log("Archivo encontrado\nLeyendo...");
+  jsonData = readJsonFile(jsonFileName);
+}
+
 let zipData = new ZipData(jsonData.exerciseNumber, jsonData.authors, jsonData.src, jsonData.dst);
 
 // Genera el archivo .zip
 zipData.generateZipArchive();
+console.log(`Archivo ${zipData.zipName} fue creado satisfactoriamente en el directorio ${zipData.dst}`);
