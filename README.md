@@ -17,7 +17,10 @@ git clone https://github.com/lTheCrow/zip-generator.git
 cd zip-generator
 ```
 
-Primero establecemos el proyecto con npm
+O directamente descargar el script del release e incluirlo en tu proyecto:
+https://github.com/lTheCrow/zip-generator/releases/download/release/zip-generator.zip
+
+Primero establecemos el proyecto con npm para poder instalar las dependencias
 ```
 npm init -y
 ```
