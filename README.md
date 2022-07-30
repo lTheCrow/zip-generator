@@ -11,6 +11,12 @@ prompt-sync
 
 ## Guia de Uso
 
+Clonamos el repositorio
+```
+git clone https://github.com/lTheCrow/zip-generator.git
+cd zip-generator
+```
+
 Primero establecemos el proyecto con npm
 ```
 npm init -y
