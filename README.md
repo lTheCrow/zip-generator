@@ -44,6 +44,11 @@ Datos para el generador de zip que hay que darle son los siguientes:
 - El directorio donde estan los archivos que queremos comprimir
 - El directorio donde enviaremos el archivo comprimido
 
+Ejemplo:
+```
+![image](https://user-images.githubusercontent.com/42654770/181875303-b580e561-ac30-4f8e-9872-554249983c46.png)
+```
+
 JSON Esqueleto donde se almacenaran los datos
 ```
 {
